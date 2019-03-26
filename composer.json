@@ -1,0 +1,38 @@
+{
+    "name": "nimaebrazi/laravel-api-presenter",
+    "description": "Provide client response with simple cache.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nima Ebrazi",
+            "email": "nimaebrazi@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2",
+        "laravel/framework": "~5.7.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.7"
+    },
+    "autoload":{
+      "psr-4":{
+          "LaravelApiPresenter\\" :"src/"
+      }
+    },
+    "autoload-dev":{
+        "psr-4":{
+            "Tests\\":"tests/"
+        }
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelApiPresenter\\ApiPresenterServiceProvider"
+            ]
+        }
+    }
+}
