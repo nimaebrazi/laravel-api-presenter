@@ -106,3 +106,15 @@ class UserController extends Controller
     }
 }
 ```
+
+### Sample client use data
+
+```jquery-css
+
+$.ajax(url).done(function(response){
+    var mainKey = response.main_key;
+    response.data[mainKey];
+    //
+});
+
+```
