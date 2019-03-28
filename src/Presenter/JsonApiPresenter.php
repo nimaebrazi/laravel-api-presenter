@@ -23,9 +23,9 @@ class JsonApiPresenter implements ApiPresenterInterface
     protected $response;
 
     /**
-     * @var ResponseFactory
+     * @var JsonResponse
      */
-    protected $responseFactory;
+    protected $jsonResponse;
 
     /**
      * @var CacheRepository
@@ -43,7 +43,7 @@ class JsonApiPresenter implements ApiPresenterInterface
     public function __construct(Response $response, ResponseFactory $responseFactory, CacheRepository $cacheRepository)
     {
         $this->response = $response;
-        $this->responseFactory = $responseFactory;
+        $this->jsonResponse = $responseFactory->make();
         $this->cacheRepository = $cacheRepository;
     }
 
@@ -109,7 +109,7 @@ class JsonApiPresenter implements ApiPresenterInterface
         $statusCode = $apiPresenterModel->getStatusCode();
 
         /** @var JsonResponse $jsonResponse */
-        $jsonResponse = $this->responseFactory->make();
+        return $this->jsonResponse->setData($response)->setStatusCode($statusCode);
 
         return $jsonResponse->setData($response)->setStatusCode($statusCode);
     }
@@ -123,5 +123,4 @@ class JsonApiPresenter implements ApiPresenterInterface
     {
         return $this->jsonResponse;
     }
-
 }

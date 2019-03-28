@@ -44,7 +44,7 @@ class ApiPresenterServiceProvider extends ServiceProvider
             return new JsonResponseFactory();
         });
 
-        $this->app->singleton(ApiPresenterInterface::class, function () {
+        $this->app->bind(ApiPresenterInterface::class, function () {
 
             return new JsonApiPresenter(
                 $this->app->make(ResponseInterface::class),
