@@ -52,3 +52,57 @@ class UserController extends Controller
 }
 
 ```
+
+### Sample Response
+
+```json
+{
+    "success": true,
+    "message": "Success fetch!",
+    "description": "Sample description",
+    "data": {
+        "main_key": "users",
+        "users": [
+            {
+                "id": 1,
+                "name": "Dr. Gladys McLaughlin",
+                "email": "wgoldner@example.com",
+                "email_verified_at": null,
+                "created_at": "2019-03-28 05:51:23",
+                "updated_at": "2019-03-28 05:51:23"
+            },
+            {
+                "id": 2,
+                "name": "Ronaldo Hackett",
+                "email": "ubaumbach@example.com",
+                "email_verified_at": null,
+                "created_at": "2019-03-28 05:51:23",
+                "updated_at": "2019-03-28 05:51:23"
+            },
+            {
+                "id": 3,
+                "name": "Sheldon Glover",
+                "email": "sigurd.hammes@example.org",
+                "email_verified_at": null,
+                "created_at": "2019-03-28 05:51:23",
+                "updated_at": "2019-03-28 05:51:23"
+            }
+        ]
+    },
+    "links": {
+        "first": "http://127.0.0.1:8000/users?page=1",
+        "last": "http://127.0.0.1:8000/users?page=167",
+        "next": "http://127.0.0.1:8000/users?page=2",
+        "prev": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 167,
+        "path": "http://127.0.0.1:8000/users",
+        "per_page": 3,
+        "to": 3,
+        "total": 500
+    }
+}
+```
