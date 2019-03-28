@@ -76,18 +76,9 @@ class JsonApiPresenter implements ApiPresenterInterface
      */
     protected function prepareWithCache(ApiPresenterModel $apiPresenterModel)
     {
-        $key = $apiPresenterModel->getCacheKey();
+        $this->errorIfCacheKeyIsEmpty($apiPresenterModel);
 
-        if (is_null($key)) {
-            throw new CacheKeyNotFound();
-        }
-
-        if ($apiPresenterModel->isCacheable() && $apiPresenterModel->isAutoGenerateMeta()) {
-            $currentPage = (string)$apiPresenterModel->getMeta()['current_page'];
-            $perPage = (string)$apiPresenterModel->getMeta()['per_page'];
-            $key = $apiPresenterModel->getCacheKey() . "__limit_{$perPage}__page_{$currentPage}";
-        }
-
+        $key = $this->createCacheKey($apiPresenterModel);
         $ttl = $apiPresenterModel->getCacheTTL();
 
         return $this->cacheRepository->remember($key, $ttl, function () use ($apiPresenterModel) {
@@ -108,10 +99,50 @@ class JsonApiPresenter implements ApiPresenterInterface
         $response = $this->response->structure($apiPresenterModel);
         $statusCode = $apiPresenterModel->getStatusCode();
 
-        /** @var JsonResponse $jsonResponse */
-        return $this->jsonResponse->setData($response)->setStatusCode($statusCode);
 
-        return $jsonResponse->setData($response)->setStatusCode($statusCode);
+        return $this->jsonResponse->setData($response)->setStatusCode($statusCode);
+    }
+
+    /**
+     * Create cache key store data.
+     *
+     * @param ApiPresenterModel $apiPresenterModel
+     * @return string
+     */
+    protected function createCacheKey(ApiPresenterModel $apiPresenterModel): string
+    {
+        if ($apiPresenterModel->isAutoGenerateMeta() && $apiPresenterModel->hasMeta()) {
+            return $this->createCacheKeyFromMeta($apiPresenterModel);
+        }
+
+        return $apiPresenterModel->getCacheKey();
+    }
+
+    /**
+     * Throw exception if cache key not exists.
+     *
+     * @param ApiPresenterModel $apiPresenterModel
+     * @throws CacheKeyNotFound
+     */
+    protected function errorIfCacheKeyIsEmpty(ApiPresenterModel $apiPresenterModel): void
+    {
+        if (is_null($apiPresenterModel->getCacheKey())) {
+            throw new CacheKeyNotFound();
+        }
+    }
+
+    /**
+     * Create cache key from meta data.
+     *
+     * @param ApiPresenterModel $apiPresenterModel
+     * @return string
+     */
+    protected function createCacheKeyFromMeta(ApiPresenterModel $apiPresenterModel): string
+    {
+        $currentPage = (string)$apiPresenterModel->getMeta()['current_page'];
+        $perPage = (string)$apiPresenterModel->getMeta()['per_page'];
+        $key = $apiPresenterModel->getCacheKey() . "__limit_{$perPage}__page_{$currentPage}";
+        return $key;
     }
 
     /**
