@@ -4,6 +4,8 @@
 namespace LaravelApiPresenter\Presenter\Model;
 
 
+use Illuminate\Contracts\Support\Arrayable;
+
 class ApiPresenterModel
 {
     /**
@@ -27,7 +29,7 @@ class ApiPresenterModel
     protected $mainKey;
 
     /**
-     * @var array
+     * @var array|Arrayable
      */
     protected $meta = [];
 
@@ -128,18 +130,18 @@ class ApiPresenterModel
     }
 
     /**
-     * @return array
+     * @return array|Arrayable
      */
-    public function getMeta(): array
+    public function getMeta()
     {
         return $this->meta;
     }
 
     /**
-     * @param array $meta
+     * @param array|Arrayable $meta
      * @return ApiPresenterModel
      */
-    public function setMeta(array $meta): self
+    public function setMeta($meta): self
     {
         $this->meta = $meta;
 
@@ -189,6 +191,10 @@ class ApiPresenterModel
      */
     public function hasMeta(): bool
     {
+        if ($this->meta instanceof Arrayable){
+            return !empty($this->meta->toArray());
+        }
+
         return !empty($this->meta);
     }
 

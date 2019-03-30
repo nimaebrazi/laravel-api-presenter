@@ -32,7 +32,7 @@ class Response implements ResponseInterface
             $structure['links'] = $meta['links'];
             $structure['meta'] = $meta['meta'];
         } elseif ($apiPresenterModel->hasMeta()) {
-            $structure['meta'] = $apiPresenterModel->getMeta();
+            $structure['meta'] = $apiPresenterModel->getMeta()->toArray();
         }
 
         return $structure;

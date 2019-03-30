@@ -142,6 +142,7 @@ class JsonApiPresenter implements ApiPresenterInterface
         $currentPage = (string)$apiPresenterModel->getMeta()['current_page'];
         $perPage = (string)$apiPresenterModel->getMeta()['per_page'];
         $key = $apiPresenterModel->getCacheKey() . "__limit_{$perPage}__page_{$currentPage}";
+
         return $key;
     }
 
