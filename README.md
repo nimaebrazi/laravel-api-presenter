@@ -1,6 +1,26 @@
 # Laravel API Presenter
 
-### Sample code 
+## Description
+
+### Installation
+
+```
+composer require nimaebrazi/laravel-api-presenter
+```
+#### Register ServiceProvider
+If using laravel 5.4.* and older version you need add service provider in config/app.php
+```php
+'providers' => [
+    ...
+    \LaravelApiPresenter\ApiPresenterServiceProvider::class,
+    ...
+]
+```
+
+### Usage
+
+#### 1. Create response without cache
+
 
 ```php
 <?php
@@ -29,82 +49,43 @@ class UserController extends Controller
         $this->apiPresenter = $apiPresenter;
     }
 
-    public function all()
+    public function find($id)
     {
-        $users = User::paginate();
-
+        $user = User::find($id);
 
         $apiPresenterModel = new ApiPresenterModel();
-        $apiPresenterModel
-            ->setMessage('Success fetch!')
-            ->setDescription('Sample description')
+        $this->apiPresenterModel
             ->withSuccessStatus()
-            ->withMeta()
-            ->cacheable()
-            ->setCacheKey('users')
-            ->setMainKey('users')
-            ->setData($users->toArray());
+            ->setMessage('Success fetch!')
+            ->setMainKey('user')
+            ->setData($user->toArray());
         
-
-        $this->apiPresenter->response()->header('X-Header-One', 'Header Value');
         return $this->apiPresenter->present($apiPresenterModel);
     }
 }
 
 ```
 
-### Sample Response
+### Response without cache
 
 ```json
 {
     "success": true,
     "message": "Success fetch!",
-    "description": "Sample description",
+    "description": "",
     "data": {
-        "main_key": "users",
-        "users": [
-            {
-                "id": 1,
-                "name": "Dr. Gladys McLaughlin",
-                "email": "wgoldner@example.com",
-                "email_verified_at": null,
-                "created_at": "2019-03-28 05:51:23",
-                "updated_at": "2019-03-28 05:51:23"
-            },
-            {
-                "id": 2,
-                "name": "Ronaldo Hackett",
-                "email": "ubaumbach@example.com",
-                "email_verified_at": null,
-                "created_at": "2019-03-28 05:51:23",
-                "updated_at": "2019-03-28 05:51:23"
-            },
-            {
-                "id": 3,
-                "name": "Sheldon Glover",
-                "email": "sigurd.hammes@example.org",
-                "email_verified_at": null,
-                "created_at": "2019-03-28 05:51:23",
-                "updated_at": "2019-03-28 05:51:23"
-            }
-        ]
-    },
-    "links": {
-        "first": "http://127.0.0.1:8000/users?page=1",
-        "last": "http://127.0.0.1:8000/users?page=167",
-        "next": "http://127.0.0.1:8000/users?page=2",
-        "prev": null
-    },
-    "meta": {
-        "current_page": 1,
-        "from": 1,
-        "last_page": 167,
-        "path": "http://127.0.0.1:8000/users",
-        "per_page": 3,
-        "to": 3,
-        "total": 500
+    "main_key": "user",
+        "user": {
+        "id": 1,
+        "name": "Mr. Claude Greenfelder I",
+        "email": "carlie84@example.com",
+        "email_verified_at": "2019-03-19 00:07:52",
+        "created_at": "2019-03-19 00:07:52",
+        "updated_at": "2019-03-19 00:07:52"
+        }
     }
 }
+
 ```
 
 ### Sample client use data
