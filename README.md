@@ -167,9 +167,78 @@ class UserController extends Controller
 ```
 
 
+#### 2. Response single object with cache
+
+```php
+<?php
+
+namespace App\Http\Controllers;
 
 
+use App\User;
+use Illuminate\Http\Request;
+use LaravelApiPresenter\Contract\ApiPresenterInterface;
+use LaravelApiPresenter\Presenter\Model\ApiPresenterModel;
 
+class UserController extends Controller
+{
+    /**
+     * @var ApiPresenterInterface
+     */
+    protected $apiPresenter;
+
+
+    public function __construct(ApiPresenterInterface $apiPresenter)
+    {
+        $this->apiPresenter = $apiPresenter;
+    }
+
+    public function find($id)
+    {
+        $user = User::find($id);
+
+        $apiPresenterModel = new ApiPresenterModel();
+        $apiPresenterModel->withSuccessStatus()
+            ->setMessage('Success fetch!')
+            ->setMainKey('user')
+            ->cacheable()
+            ->setCacheKey("user_{$id}")
+            ->setData($user->toArray());
+        
+        return $this->apiPresenter->present($apiPresenterModel);
+    }
+}
+
+```
+
+```json
+{
+    "success": true,
+    "message": "Success fetch!",
+    "description": "",
+    "data": {
+    "main_key": "user",
+        "user": {
+        "id": 1,
+        "name": "Mr. Claude Greenfelder I",
+        "email": "carlie84@example.com",
+        "email_verified_at": "2019-03-19 00:07:52",
+        "created_at": "2019-03-19 00:07:52",
+        "updated_at": "2019-03-19 00:07:52"
+        }
+    }
+}
+
+```
+
+##### Note
+It's depend on your application cache driver setting.
+
+For example you can find output key if using redis like:
+```text
+laravel_cache:user_1
+```
+ 
 
 
 
