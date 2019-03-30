@@ -1,6 +1,7 @@
 # Laravel API Presenter
 
 ## Description
+Simple and powerful client response integrated with Laravel cache.
 
 ### Installation
 
