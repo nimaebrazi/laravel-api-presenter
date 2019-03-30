@@ -7,9 +7,9 @@ namespace LaravelApiPresenter;
 use Illuminate\Cache\Repository as CacheRepository;
 use Illuminate\Support\ServiceProvider;
 use LaravelApiPresenter\Contract\ApiPresenterInterface;
+use LaravelApiPresenter\Contract\ResponseFactory;
 use LaravelApiPresenter\Contract\ResponseInterface;
 use LaravelApiPresenter\Factory\JsonResponseFactory;
-use LaravelApiPresenter\Factory\ResponseFactory;
 use LaravelApiPresenter\Presenter\JsonApiPresenter;
 use LaravelApiPresenter\Presenter\Response;
 

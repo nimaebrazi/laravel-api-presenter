@@ -1,7 +1,7 @@
 <?php
 
 
-namespace LaravelApiPresenter\Factory;
+namespace LaravelApiPresenter\Contract;
 
 
 interface ResponseFactory

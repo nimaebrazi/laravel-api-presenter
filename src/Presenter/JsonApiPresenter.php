@@ -7,8 +7,8 @@ namespace LaravelApiPresenter\Presenter;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Http\JsonResponse;
 use LaravelApiPresenter\Contract\ApiPresenterInterface;
+use LaravelApiPresenter\Contract\ResponseFactory;
 use LaravelApiPresenter\Exception\CacheKeyNotFound;
-use LaravelApiPresenter\Factory\ResponseFactory;
 use LaravelApiPresenter\Presenter\Model\ApiPresenterModel;
 
 /**
