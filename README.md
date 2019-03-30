@@ -417,3 +417,16 @@ For more info about MetaModel read class:
 ```php
 LaravelApiPresenter\Presenter\Model\MetaModel
 ```
+
+#### How to set custom response?
+
+You access to response object in ApiPresenter.
+
+Suppose you want change response header:
+```php
+...
+        $this->apiPresenter->response()
+            ->header('X-Header-One', 'Header Value One ')
+            ->header('X-Header-Two', 'Header Value Two');
+...
+```
