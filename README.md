@@ -33,8 +33,6 @@ use Illuminate\Http\Request;
 use LaravelApiPresenter\Contract\ApiPresenterInterface;
 use LaravelApiPresenter\Presenter\Model\ApiPresenterModel;
 
-
-
 class UserController extends Controller
 {
     /**
@@ -43,7 +41,6 @@ class UserController extends Controller
     protected $apiPresenter;
 
 
-    
     public function __construct(ApiPresenterInterface $apiPresenter)
     {
         $this->apiPresenter = $apiPresenter;
