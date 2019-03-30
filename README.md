@@ -51,7 +51,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         $apiPresenterModel = new ApiPresenterModel();
-        $this->apiPresenterModel
+        $apiPresenterModel
             ->withSuccessStatus()
             ->setMessage('Success fetch!')
             ->setMainKey('user')
@@ -116,7 +116,7 @@ class UserController extends Controller
         $user = User::find($ids);
 
         $apiPresenterModel = new ApiPresenterModel();
-        $this->apiPresenterModel
+        $apiPresenterModel
             ->withSuccessStatus()
             ->setMessage('Success fetch!')
             ->setMainKey('user')
