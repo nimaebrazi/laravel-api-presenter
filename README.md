@@ -413,7 +413,7 @@ class UserController extends Controller
 
 ```
 
-Form more info about MetaModel read class:
+For more info about MetaModel read class:
 ```php
 LaravelApiPresenter\Presenter\Model\MetaModel
 ```
