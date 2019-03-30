@@ -345,20 +345,75 @@ class UserController extends Controller
 }
 
 ```
+##### Note:
+Package generate key from meta and transform cache key in redis like:
+```text
+laravel_cache:users__limit_3__page_1
+```
+
+#### 4. Response with cache and _custom pagination_
+- Pay attention, when use custom meta, you should make custom cache key too.
+Suppose you set cache key `users` and paginate your data and respond to client `page one`. So package set your cache `users` and not append meta data to cache key.
+And your response not correct when client limit the result of data and page.
+- Don't use `withMeta()` method when set custom meta data.
+
+##### Example 4.1
+
+```php
+<?php
+
+namespace App\Http\Controllers;
 
 
+use App\User;
+use Illuminate\Http\Request;
+use LaravelApiPresenter\Contract\ApiPresenterInterface;
+use LaravelApiPresenter\Presenter\Model\ApiPresenterModel;
+use LaravelApiPresenter\Presenter\Model\MetaModel;
+
+class UserController extends Controller
+{
+    /**
+     * @var ApiPresenterInterface
+     */
+    protected $apiPresenter;
 
 
+    public function __construct(ApiPresenterInterface $apiPresenter)
+    {
+        $this->apiPresenter = $apiPresenter;
+    }
+
+    public function all(Request $request)
+    {
+        $limit = $request->has('limit') ? $request->input('limit') : 5;
+
+        $users = User::paginate($limit);
+
+        $metaModel = new MetaModel();
+        $metaModel->setCurrentPage(1)
+            ->setLastPage(3)
+            ->setTo(3)
+            ->setTotal(50);
 
 
-### Sample client use data
+        $apiPresenterModel = new ApiPresenterModel();
+        $apiPresenterModel
+            ->withSuccessStatus()
+            ->setMessage('Success fetch!')
+            ->setMainKey('users')
+            ->withMeta()
+            ->cacheable()
+            ->setCacheKey("users__limit_1__page_1")
+            ->setData($users->toArray());
 
-```jquery-css
+        return $this->apiPresenter->present($apiPresenterModel);
+    }
+}
 
-$.ajax(url).done(function(response){
-    var mainKey = response.main_key;
-    response.data[mainKey];
-    //
-});
+```
 
+Form more info about MetaModel read class:
+```php
+LaravelApiPresenter\Presenter\Model\MetaModel
 ```
