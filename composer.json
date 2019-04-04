@@ -9,7 +9,7 @@
             "email": "nimaebrazi@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+
     "require": {
         "php": "^7.2"
     },
@@ -33,5 +33,9 @@
                 "LaravelApiPresenter\\ApiPresenterServiceProvider"
             ]
         }
-    }
+    },
+
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+
 }
