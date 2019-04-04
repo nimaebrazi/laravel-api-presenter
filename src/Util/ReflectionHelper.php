@@ -4,12 +4,17 @@
 namespace LaravelApiPresenter\Util;
 
 
+/**
+ * Class ReflectionHelper
+ * @package LaravelApiPresenter\Util
+ */
 class ReflectionHelper
 {
     /**
      * @param $object
      *
      * @return array
+     * @throws \ReflectionException
      */
     public static function getProProperties($object)
     {

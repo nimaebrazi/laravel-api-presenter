@@ -8,7 +8,6 @@ use Exception;
 
 /**
  * Class CacheKeyNotFound
- *
  * @package LaravelApiPresenter\Exceptions
  */
 class CacheKeyNotFound extends Exception

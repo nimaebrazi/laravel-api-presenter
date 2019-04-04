@@ -4,6 +4,10 @@
 namespace LaravelApiPresenter\Contract;
 
 
+/**
+ * Interface ResponseFactory
+ * @package LaravelApiPresenter\Contract
+ */
 interface ResponseFactory
 {
     /**

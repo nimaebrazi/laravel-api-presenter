@@ -7,6 +7,10 @@ namespace LaravelApiPresenter\Presenter\Model;
 use Illuminate\Contracts\Support\Arrayable;
 use LaravelApiPresenter\Util\ReflectionHelper;
 
+/**
+ * Class MetaModel
+ * @package LaravelApiPresenter\Presenter\Model
+ */
 class MetaModel implements Arrayable
 {
     /**

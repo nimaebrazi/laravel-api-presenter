@@ -6,6 +6,10 @@ namespace LaravelApiPresenter\Presenter\Model;
 
 use Illuminate\Contracts\Support\Arrayable;
 
+/**
+ * Class ApiPresenterModel
+ * @package LaravelApiPresenter\Presenter\Model
+ */
 class ApiPresenterModel
 {
     /**

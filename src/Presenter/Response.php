@@ -7,6 +7,10 @@ namespace LaravelApiPresenter\Presenter;
 use LaravelApiPresenter\Contract\ResponseInterface;
 use LaravelApiPresenter\Presenter\Model\ApiPresenterModel;
 
+/**
+ * Class Response
+ * @package LaravelApiPresenter\Presenter
+ */
 class Response implements ResponseInterface
 {
     use MetaTrait;

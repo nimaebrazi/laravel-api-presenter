@@ -4,6 +4,10 @@
 namespace LaravelApiPresenter\Presenter;
 
 
+/**
+ * Trait MetaTrait
+ * @package LaravelApiPresenter\Presenter
+ */
 trait MetaTrait
 {
     /**

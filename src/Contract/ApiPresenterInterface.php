@@ -6,6 +6,10 @@ namespace LaravelApiPresenter\Contract;
 
 use LaravelApiPresenter\Presenter\Model\ApiPresenterModel;
 
+/**
+ * Interface ApiPresenterInterface
+ * @package LaravelApiPresenter\Contract
+ */
 interface ApiPresenterInterface
 {
     /**
